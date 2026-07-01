@@ -45,19 +45,31 @@ def split_text(text, max_chars=1000):
     return chunks
 
 
+# ==========================================
+# ఈ క్రింది ఫంక్షన్‌లో మార్పులు చేసాము (HIGHLIGHTED CHANGE)
+# ==========================================
 async def generate_audio(full_text, voice_model):
-    """అన్‌లిమిటెడ్ టెక్స్ట్‌ను ఆడియో కింద మార్చే ఫంక్షన్"""
+    """అన్‌లిమిటెడ్ టెక్స్ట్‌ను హై-క్వాలిటీ మరియు క్లియర్ ఆడియో కింద మార్చే ఫంక్షన్"""
     chunks = split_text(full_text)
     audio_data = b""
 
+    # వాయిస్ క్వాలిటీ మరియు స్పష్టత పెంచడానికి స్పీడ్ 5% తగ్గించాం
+    voice_speed = "-5%"
+    voice_pitch = "+0Hz"
+
     for chunk in chunks:
-        communicate = edge_tts.Communicate(chunk, voice_model)
+        # ఇక్కడ rate మరియు pitch పారామీటర్లను యాడ్ చేశాం
+        communicate = edge_tts.Communicate(
+            chunk, voice_model, rate=voice_speed, pitch=voice_pitch
+        )
         async for chunk_data in communicate.stream():
             if chunk_data["type"] == "audio":
                 audio_data += chunk_data["data"]
 
     return audio_data
 
+
+# ==========================================
 
 # జనరేట్ బటన్ క్లిక్ చేసినప్పుడు
 if st.button("AI వాయిస్ జనరేట్ చేయి 🚀"):
