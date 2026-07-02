@@ -1,6 +1,6 @@
 streamlit
 edge-tts
-transformers
-torch
-accelerate
+crewai
+google-generativeai
+
 
