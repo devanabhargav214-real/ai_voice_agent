@@ -1,2 +1,6 @@
 streamlit
 edge-tts
+transformers
+torch
+accelerate
+
