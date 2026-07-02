@@ -1,8 +1,9 @@
 
 edge-tts
 streamlit
-crewai
-google-generativeai
+crewai==0.32.0
+google-generativeai==0.5.4
+
 
 
 
